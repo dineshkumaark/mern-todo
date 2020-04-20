@@ -1,23 +1,19 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const removeFields = require("../middleware/removeFiledData");
 
-const userSchema = new mongoose.Schema(
-   {
-      name: {
-         type: String,
-         maxlength: 30,
-      },
-      email: {
-         type: String,
-         trim: true,
-      },
-      password: String,
-      token: String,
+const userSchema = new mongoose.Schema({
+   name: {
+      type: String,
+      maxlength: 30,
    },
-   { timestamps: true }
-);
+   email: {
+      type: String,
+      trim: true,
+   },
+   password: String,
+   token: String,
+});
 
 userSchema.methods.comparePassword = function (plainPassword) {
    return bcrypt.compareSync(plainPassword, this.password);

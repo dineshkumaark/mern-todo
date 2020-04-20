@@ -9,7 +9,7 @@ const initializeDB = require("./config/db");
 // PORT
 const PORT = process.env.PORT || 4001;
 // Routes
-const AuthRoutes = require("./routes");
+const { AuthRoutes, TodoRoutes } = require("./routes");
 
 app.use(cors());
 
@@ -20,6 +20,7 @@ app.use(bodyParser.json());
 initializeDB();
 
 app.use("/auth", AuthRoutes);
+app.use("/todo", TodoRoutes);
 
 app.use((req, res, next) => {
    let status = req.statusCode || 500;
