@@ -41,6 +41,8 @@ const todoValidation = async (req, res, next) => {
    const schema = Joi.object({
       title: Joi.string().required(),
       done: Joi.boolean(),
+      startTime: Joi.date(),
+      avatar: Joi.any(),
       _id: Joi.string(),
    });
 

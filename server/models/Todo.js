@@ -7,6 +7,8 @@ const todoSchema = Schema(
          type: String,
          trim: true,
       },
+      avatar: String,
+      startTime: Date,
       done: Boolean,
       createdBy: {
          type: Schema.Types.ObjectId,

@@ -21,4 +21,6 @@ Router.delete(
    todoController.deleteTodoController
 );
 
+Router.post("/filterdate", todoController.filterDateController);
+
 module.exports = Router;

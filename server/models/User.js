@@ -10,6 +10,7 @@ const userSchema = new mongoose.Schema({
    email: {
       type: String,
       trim: true,
+      unique: true,
    },
    password: String,
    token: String,
@@ -25,7 +26,7 @@ userSchema.methods.generateToken = function (cb) {
    const JWTSECRECT = process.env.JWTSECRECT;
    user.token = "";
 
-   const token = jwt.sign(user.toJSON(), JWTSECRECT);
+   const token = jwt.sign(user.toJSON(), JWTSECRECT, { expiresIn: "24h" });
    user.token = token;
 
    user.save((err, user) => {

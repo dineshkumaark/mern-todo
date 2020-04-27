@@ -15,17 +15,25 @@ const getAllTodoController = async (req, res, next) => {
 
 const createTodoController = async (req, res, next) => {
    try {
-      const todo = await todoServices.createTodo(req.body, req.user);
-      res.send({ success: true, data: todo });
+      const todo = await todoServices.createTodo(
+         req.body,
+         req.user,
+         req.hostname
+      );
+      res.send({ success: true, data: todo, message: "Todo Created!!" });
    } catch (err) {
+      console.log(err);
+
       res.status(400).send({ success: false, message: err });
    }
 };
 
 const editTodoController = async (req, res, next) => {
+   console.log(req.body);
+
    try {
       if (req.method !== "GET") {
-         await todoServices.editTodo(req.body);
+         await todoServices.editTodo(req.body, req.hostname);
       } else {
          await todoServices.changeDone(req);
       }
@@ -44,9 +52,19 @@ const deleteTodoController = async (req, res, next) => {
    }
 };
 
+const filterDateController = async (req, res, next) => {
+   try {
+      const todo = await todoServices.filterDate(req.body);
+      res.send({ success: true, data: todo });
+   } catch (err) {
+      res.status(400).send({ success: false, message: err });
+   }
+};
+
 module.exports = {
    getAllTodoController,
    createTodoController,
    editTodoController,
    deleteTodoController,
+   filterDateController,
 };

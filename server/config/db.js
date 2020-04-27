@@ -8,6 +8,7 @@ const initializeDB = () => {
          useNewUrlParser: true,
          useUnifiedTopology: true,
          useFindAndModify: false,
+         useCreateIndex: true,
       },
       (err, data) => {
          if (err) return console.error(err.message);
